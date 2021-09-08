@@ -9,6 +9,7 @@ const Header = () => {
   );
 };
 export default Header;
+
 const styles = StyleSheet.create({
   header: {
     height: 80,

@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
   FlatList,
@@ -8,10 +7,11 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import Header from "./components/header";
+import Header from "./components/Header";
 import TodoInput from "./components/TodoInput";
 import TodoItem from "./components/TodoItem";
 export default function App() {
+  // dummy state for learning purpose 
   const [people, setPpl] = useState([
     { name: "Ahmed", id: "1 " },
     { name: "youshi", id: "2 " },
@@ -19,35 +19,33 @@ export default function App() {
     { name: "luigi", id: "4 " },
     { name: "peach", id: "5 " },
     { name: "toad", id: "6 " },
-    { name: "bowser", id: "7 " },
+    { name: "Muhammed", id: "7 " },
     { name: "inna", id: "8 " },
     { name: "kiko", id: "9 " },
     { name: "lalo", id: "10" },
     { name: "Angle", id: "11" },
   ]);
-  const submitHandler = (text) => {
-    if (text.length > 2) {
+  // Add New Todo Item to the List
+  const submitHandler = (newTodoItem) => {
+    if (newTodoItem.length > 2) {
       setPpl((prevState) => [
         ...prevState,
-        { name: text, id: Math.random().toString() },
+        { name: newTodoItem, id: Math.random().toString() },
       ]);
     } else {
+      // in case the new item length less than 3 chars ,
       Alert.alert("Oops", "Todos must be over 3 chars long", [
         { text: "Understood", onPress: () => console.log("Alert Closed") },
-        { text: "What's that!!!", onPress: () => console.log("Alert Closed") },
       ]);
     }
   };
-  const pressHandler = (id) => {
-    setPpl((ppl) => [...ppl.filter((item) => item.id !== id)]);
+
+  // delete item from the list using filter method
+  const handleDeleteItem = (id) => {
+    setPpl((prevState) => [...prevState.filter((item) => item.id !== id)]);
   };
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-        console.log("pressed");
-      }}
-    >
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <Header />
         <View style={styles.content}>
@@ -57,7 +55,7 @@ export default function App() {
               data={people}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
-                <TodoItem item={item} pressHandler={pressHandler} />
+                <TodoItem item={item} handleDeleteItem={handleDeleteItem} />
               )}
             />
           </View>

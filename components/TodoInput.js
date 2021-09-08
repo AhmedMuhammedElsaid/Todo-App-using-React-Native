@@ -7,11 +7,19 @@ const TodoInput = ({ onSubmit }) => {
   return (
     <View>
       <TextInput
-        placeholder="new todo ...."
+        placeholder="add new todo ...."
         onChangeText={changeHandler}
         style={styles.input}
+        value={todo}
       />
-      <Button title="Add todo" color="coral" onPress={() => onSubmit(todo)} />
+      <Button
+        title="Add todo..."
+        color="coral"
+        onPress={() => {
+          onSubmit(todo);
+          setTodo("");
+        }}
+      />
     </View>
   );
 };

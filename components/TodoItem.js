@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-const TodoItem = ({ item, pressHandler }) => {
+const TodoItem = ({ item,  handleDeleteItem }) => {
   return (
     <TouchableOpacity>
       <View style={styles.item}>
@@ -9,7 +9,7 @@ const TodoItem = ({ item, pressHandler }) => {
           name="delete"
           size={18}
           color="#333"
-          onPress={() => pressHandler(item.id)}
+          onPress={() => handleDeleteItem(item.id)}
         />
         <Text style={styles.itemText}> {item.name}</Text>
       </View>
